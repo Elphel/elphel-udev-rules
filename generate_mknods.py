@@ -35,21 +35,24 @@ __maintainer__ = "Andrey Filippov"
 __email__ = "andrey@elphel.com"
 __status__ = "Development"
 def process_header():
+    print("# --- This is an auto-generated file, see %s ---"%(sys.argv[0]))
     print("define mknodes =")
-#    files = []
     pat=re.compile(r'#define\s+(\w+)\s+\(\s*"([^"]+)"\s*,\s*"([^"]+)"\s*,\s*(\w*)\s*,\s*(\w*)\s*,\s*"([^"]+)"\s*,\s*"([^"]+)"\s*\)(.*)')
+    """ Example of a string to match:
+    #define DEV393_I2C_ENABLE     ("xi2cenable",        "fpga_xi2c",     134,  7, "0666", "c")  ///< enable(/protect)...
+    groups:       1                     2                   3             4    5     6     7            8
+    """
     f = open(sys.argv[1], "r")
     line = f.readline()
     while line:
         fs = pat.search(line)
         if fs:
-            print("mknod -m %s $(TARGETDIR)/%-20s %s %3s %3s #%s"%(
-                fs.group(6), fs.group(2), fs.group(7), fs.group(4), fs.group(5), fs.group(8).strip(" \t/<*")))
-#            files.append(fs.group(2))
+            comment = fs.group(8).strip(" \t/<*")
+            if comment:
+                comment = " # "+comment
+            print("mknod -m %s $(TARGETDIR)/%-20s %s %3s %3s%s"%(
+                fs.group(6), fs.group(2), fs.group(7), fs.group(4), fs.group(5), comment))
         line = f.readline()
-#    for f in files:
-#        print("chown root:root $(TARGETDIR)/%-20s"%(f))
     print("endef")
-#    mknod -m 0622   $(TARGETDIR)/circbuf0   c 135   32
 if __name__ == "__main__":
     process_header()

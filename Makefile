@@ -9,5 +9,6 @@ install:generated_include
 	install -m 644 90-elphel-automount.rules $(DESTDIR)/etc/udev/rules.d
 	install -d $(TARGETDIR)
 	@$(mknodes)
+	
 clean:
 	rm -f generated_include	
