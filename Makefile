@@ -11,4 +11,4 @@ install:generated_include
 	@$(mknodes)
 	
 clean:
-	rm -f generated_include	
+	-rm -f generated_include	

@@ -1,6 +1,11 @@
-.project
-.cproject
-.pydevproject
-.settings
-*.directory
+html/*
+attic/*
+/.project
+/.cproject
+/.pydevproject
+/.externalToolBuilders
+/.settings
+.directory
 generated*
+sysroots
+bitbake-logs
