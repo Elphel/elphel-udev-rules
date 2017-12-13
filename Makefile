@@ -8,8 +8,7 @@ install:generated_include
 	@echo $(X393_DEVICES)
 	install -d $(DESTDIR)/etc/udev/rules.d
 	install -m 644 90-elphel-automount.rules $(DESTDIR)/etc/udev/rules.d
-	# 100+ seconds to run 50-elphel-static-nodes.rules at boot. Fast if run manually
-	#install -m 644 50-elphel-static-nodes.rules $(DESTDIR)/etc/udev/rules.d
+	install -m 644 50-elphel-static-nodes.rules $(DESTDIR)/etc/udev/rules.d
 	install -d $(TARGETDIR)
 	$(mknodes)
 
