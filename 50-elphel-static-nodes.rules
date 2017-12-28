@@ -1,5 +1,0 @@
-ACTION!="add", GOTO="static_nodes_end"
-
-ACTION=="add", RUN+="/usr/bin/rsync -a /lib/udev/devices/ /dev/"
-
-LABEL="static_nodes_end"
